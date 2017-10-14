@@ -195,9 +195,9 @@ public class ArticleDetailFragment extends Fragment {
     }
 
     private void bindViews() {
-        progressBar.setVisibility(View.GONE);
 
         if (mCursor != null) {
+            progressBar.setVisibility(View.GONE);
             // Add title to toolbar (only visible when toolbar is collapsed)
             collapsingToolbarLayout.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
 

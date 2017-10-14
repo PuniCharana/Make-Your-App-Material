@@ -42,6 +42,8 @@ public class ArticleDetailActivity extends AppCompatActivity {
         mPagerAdapter = new MyPagerAdapter(getFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
+        mPager.setPageTransformer(true, new DepthPageTransformer());
+
         mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageScrollStateChanged(int state) {
