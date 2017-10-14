@@ -198,6 +198,7 @@ public class ArticleDetailFragment extends Fragment {
 
         if (mCursor != null) {
             progressBar.setVisibility(View.GONE);
+            appBarLayout.setVisibility(View.VISIBLE);
             // Add title to toolbar (only visible when toolbar is collapsed)
             collapsingToolbarLayout.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
 
@@ -235,16 +236,20 @@ public class ArticleDetailFragment extends Fragment {
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                             Bitmap bitmap = ((GlideBitmapDrawable) resource.getCurrent()).getBitmap();
-                            Palette palette = Palette.from(bitmap).generate();
-                            int defaultColor = 0xFF333333;
-                            int color = palette.getDarkMutedColor(defaultColor);
-                            articleTitleContainer.setBackgroundColor(color);
+                            // Palette palette = Palette.from(bitmap).generate();
+                            Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                                @Override
+                                public void onGenerated(Palette palette) {
+                                    int defaultColor = 0xFF333333;
+                                    int color = palette.getDarkMutedColor(defaultColor);
+                                    articleTitleContainer.setBackgroundColor(color);
+                                }
+                            });
                             return false;
                         }
                     })
                     .into(articleThumbnail);
 
-            appBarLayout.setVisibility(View.VISIBLE);
         } else {
             appBarLayout.setVisibility(View.GONE);
         }

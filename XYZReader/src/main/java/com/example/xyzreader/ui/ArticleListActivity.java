@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
@@ -123,6 +124,7 @@ public class ArticleListActivity extends AppCompatActivity {
             StaggeredGridLayoutManager sglm =
                     new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
             mRecyclerView.setLayoutManager(sglm);
+            Snackbar.make(findViewById(android.R.id.content), "Data loaded", Snackbar.LENGTH_SHORT).show();
         }
 
         @Override
@@ -212,10 +214,17 @@ public class ArticleListActivity extends AppCompatActivity {
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                             Bitmap bitmap = ((GlideBitmapDrawable) resource.getCurrent()).getBitmap();
-                            Palette palette = Palette.from(bitmap).generate();
-                            int defaultColor = 0xFF333333;
-                            int color = palette.getDarkMutedColor(defaultColor);
-                            holder.itemView.setBackgroundColor(color);
+                            // Palette palette = Palette.from(bitmap).generate();
+
+                            Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                                @Override
+                                public void onGenerated(Palette palette) {
+                                    int defaultColor = 0xFF333333;
+                                    int color = palette.getDarkMutedColor(defaultColor);
+                                    holder.itemView.setBackgroundColor(color);
+                                }
+                            });
+
                             return false;
                         }
                     })

@@ -7,7 +7,7 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
-        android:elevation="4dp"
+        android:elevation="@dimen/app_bar_layout_elevation"
         android:layout_width="match_parent"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:layout_height="400dp">
@@ -83,7 +83,6 @@
             android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
             android:padding="@dimen/medium_padding"
             android:textColor="@color/color_black"
-            android:textColorLink="@color/theme_accent"
             android:textSize="@dimen/medium_text_size" />
 
     </ScrollView>
@@ -103,7 +102,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:contentDescription="@string/action_share"
-        android:elevation="12dp"
+        android:elevation="@dimen/fab_elevation"
         android:src="@drawable/ic_arrow_up" />
 
     <android.support.design.widget.FloatingActionButton
@@ -115,7 +114,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:contentDescription="@string/action_share"
-        android:elevation="12dp"
+        android:elevation="@dimen/fab_elevation"
         android:src="@drawable/ic_share" />
 
 </android.support.design.widget.CoordinatorLayout>
